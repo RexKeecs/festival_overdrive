@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibration Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mobile Vibration Demo</h1>
+  <button id="start">Start Vibration</button>
+  <button id="stop">Stop Vibration</button>
+
+  <script>
+    let vibrationInterval;
+
+    // Function to start vibration every 10 seconds
+    function startVibration() {
+      if ('vibrate' in navigator) {
+        vibrationInterval = setInterval(() => {
+          // Vibrate for 200ms
+          navigator.vibrate(200);
+          console.log('Vibration sent!');
+        }, 10000); // Every 10 seconds
+        alert("Vibration started! Keep the browser open.");
+      } else {
+        alert("Your device/browser does not support vibration.");
+      }
+    }
+
+    // Function to stop vibration
+    function stopVibration() {
+      clearInterval(vibrationInterval);
+      navigator.vibrate(0); // Stops ongoing vibration (if any)
+      console.log('Vibration stopped.');
+    }
+
+    // Attach event listeners to buttons
+    document.getElementById('start').addEventListener('click', startVibration);
+    document.getElementById('stop').addEventListener('click', stopVibration);
+  </script>
+</body>
+</html>
