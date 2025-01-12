@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vibration Test</title>
+  <title>Metronome Sound</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,37 +18,42 @@
   </style>
 </head>
 <body>
-  <h1>Mobile Vibration Demo</h1>
-  <button id="start">Start Vibration</button>
-  <button id="stop">Stop Vibration</button>
+  <h1>Metronome Sound Demo</h1>
+  <button id="start">Start Metronome</button>
+  <button id="stop">Stop Metronome</button>
+
+  <audio id="metronome-sound" src="metronome.mp3"></audio> <!-- Add your metronome sound file -->
 
   <script>
-    let vibrationInterval;
+    let metronomeInterval;
 
-    // Function to start vibration every 10 seconds
-    function startVibration() {
-      if ('vibrate' in navigator) {
-        vibrationInterval = setInterval(() => {
-          // Vibrate for 200ms
-          navigator.vibrate(200);
-          console.log('Vibration sent!');
-        }, 10000); // Every 10 seconds
-        alert("Vibration started! Keep the browser open.");
-      } else {
-        alert("Your device/browser does not support vibration.");
+    // Function to start the metronome sound
+    function startMetronome() {
+      const audio = document.getElementById('metronome-sound');
+      if (!audio) {
+        alert("Audio element not found!");
+        return;
       }
+
+      // Play the sound every 3 seconds
+      metronomeInterval = setInterval(() => {
+        audio.currentTime = 0; // Reset playback to the start
+        audio.play().catch(err => console.error("Playback error:", err)); // Play the sound
+        console.log('Metronome sound played!');
+      }, 3000); // Every 3 seconds
+
+      alert("Metronome started! Keep the browser open.");
     }
 
-    // Function to stop vibration
-    function stopVibration() {
-      clearInterval(vibrationInterval);
-      navigator.vibrate(0); // Stops ongoing vibration (if any)
-      console.log('Vibration stopped.');
+    // Function to stop the metronome sound
+    function stopMetronome() {
+      clearInterval(metronomeInterval); // Stop the interval
+      console.log('Metronome stopped.');
     }
 
     // Attach event listeners to buttons
-    document.getElementById('start').addEventListener('click', startVibration);
-    document.getElementById('stop').addEventListener('click', stopVibration);
+    document.getElementById('start').addEventListener('click', startMetronome);
+    document.getElementById('stop').addEventListener('click', stopMetronome);
   </script>
 </body>
 </html>
