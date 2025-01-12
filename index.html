@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Metronome Sound</title>
+  <title>Metronome Every 10 Seconds</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -22,12 +22,12 @@
   <button id="start">Start Metronome</button>
   <button id="stop">Stop Metronome</button>
 
-  <audio id="metronome-sound" src="metronome.mp3"></audio> <!-- Add your metronome sound file -->
+  <audio id="metronome-sound" src="metronome.mp3"></audio> <!-- Add your 3-second metronome sound file -->
 
   <script>
     let metronomeInterval;
 
-    // Function to start the metronome sound
+    // Function to start playing the metronome sound every 10 seconds
     function startMetronome() {
       const audio = document.getElementById('metronome-sound');
       if (!audio) {
@@ -35,14 +35,13 @@
         return;
       }
 
-      // Play the sound every 3 seconds
       metronomeInterval = setInterval(() => {
         audio.currentTime = 0; // Reset playback to the start
         audio.play().catch(err => console.error("Playback error:", err)); // Play the sound
         console.log('Metronome sound played!');
-      }, 3000); // Every 3 seconds
+      }, 10000); // Every 10 seconds
 
-      alert("Metronome started! Keep the browser open.");
+      alert("Metronome started! The sound will play every 10 seconds.");
     }
 
     // Function to stop the metronome sound
